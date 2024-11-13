@@ -1,0 +1,610 @@
+<!DOCTYPE html> 
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gran Retiro Espiritual 2024</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #060606, #0d0d0d);
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            position: relative;
+        }
+
+        nav {
+            background-color: rgba(255, 255, 255, 0.1);
+            padding: 0.5rem;
+        }
+
+        nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+
+        nav ul li a:hover {
+            color: #ffd700;
+        }
+
+        .container {
+            max-width: 100%;
+            margin: 0 auto;
+            padding: 1rem;
+        }
+
+        .event-info {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .event-details {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+
+        .detail-card {
+            background-color: #fff;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .detail-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .image-slider {
+            width: 100%;
+            margin: 1rem auto;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .slider-images {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
+        }
+
+        .slider-images img {
+            width: 100%;
+            height: auto;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+
+        .slider-button {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(255, 255, 255, 0.5);
+            border: none;
+            font-size: 1.5rem;
+            padding: 0.5rem;
+            cursor: pointer;
+        }
+
+        .slider-button.prev {
+            left: 10px;
+        }
+
+        .slider-button.next {
+            right: 10px;
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* Mantiene la relación de aspecto 16:9 */
+            height: 0;
+            overflow: hidden;
+            margin: 1rem 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+        }
+
+        .map-container {
+            width: 100%;
+            height: 300px;
+            margin: 1rem 0;
+        }
+
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 10px;
+        }
+
+        .whatsapp-button {
+            display: inline-flex;
+            align-items: center;
+            padding: 0.5rem 1rem;
+            background-color: #25D366;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s, transform 0.3s;
+            gap: 5px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            font-size: 0.8rem;
+        }
+
+        .whatsapp-button:hover {
+            background-color: #128C7E;
+            transform: scale(1.05);
+        }
+
+        .whatsapp-icon {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
+        .countdown {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .countdown-item {
+            background-color: rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.5rem;
+            border-radius: 5px;
+            font-size: 0.8rem;
+        }
+
+        .header-container {
+            padding: 10px;
+            position: relative;
+        }
+
+        .header-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .text-content {
+            text-align: center;
+        }
+
+        .text-content h1 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .text-content p {
+            font-size: 0.9rem;
+        }
+
+        .image-content img {
+            width: 80px;
+            height: auto;
+            border-radius: 8px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease-in;
+        }
+
+        h2 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        p {
+            font-size: 0.9rem;
+        }
+
+        /* Estilos para el formulario */
+        .form-container {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1rem;
+            margin: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        .form-group {
+            margin-bottom: 1rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+
+        .submit-button {
+            background-color: #4a6ee0;
+            color: white;
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: background-color 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #3a5bc0;
+        }
+
+        @media (min-width: 768px) {
+            .container {
+                padding: 2rem;
+            }
+
+            .event-details {
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            }
+
+            nav ul {
+                flex-direction: row;
+            }
+
+            .header-content {
+                flex-direction: row;
+                justify-content: space-between;
+            }
+
+            .text-content h1 {
+                font-size: 2rem;
+            }
+
+            .text-content p {
+                font-size: 1rem;
+            }
+
+            .image-content img {
+                width: 100px;
+            }
+
+            .whatsapp-button {
+                font-size: 1rem;
+                padding: 0.75rem 1.5rem;
+            }
+
+            .whatsapp-icon {
+                width: 24px;
+                height: 24px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header-container">
+        <div class="header-content">
+            <div class="image-content left">
+                <img src="https://www.kindpng.com/picc/m/663-6635474_iglesia-pentecostal-dios-es-amor-logo-png-transparent.png" alt="Logo Iglesia Pentecostal Dios es Amor">
+            </div>
+            <div class="text-content">
+                <h1>"Gran Retiro Espiritual: Deja que Dios guíe tu camino"</h1>
+                <p>Organizado por la Iglesia Pentecostal Dios Es Amor</p>
+            </div>
+            <div class="image-content right">
+                <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/466420700_511609778537147_8630056224535435520_n.jpg?stp=dst-jpg_p180x540&_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeEkOtC4ORTmMnBJ207xFi0LJ1SCOngxV4QnVII6eDFXhNb9Wg8K_qCJsLqY4iVUPKboAhLjC8gYgpLqTDdbMFkq&_nc_ohc=k-dYOTQ2euAQ7kNvgFq9xyK&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AlzJrQYcj4WhV0J4Jm40Bn2&oh=00_AYBbWqS4GI08rHCtkuAtEtAXWXr04JPe7_tMjQ5AO3I2tA&oe=6739CC8A" alt="Logo de Expanción">
+            </div>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#info">Información</a></li>
+                <li><a href="#video">Video</a></li>
+                <li><a href="#galeria">Galería</a></li>
+                <li><a href="#ubicacion">Ubicación</a></li>
+                <li><a href="#formulario">Inscripción</a></li>
+            </ul>
+        </nav>
+        <div class="countdown">
+            <div class="countdown-item">
+                <span id="days">00</span> días
+            </div>
+            <div class="countdown-item">
+                <span id="hours">00</span> horas
+            </div>
+            <div class="countdown-item">
+                <span id="minutes">00</span> minutos
+            </div>
+            <div class="countdown-item">
+                <span id="seconds">00</span> segundos
+            </div>
+        </div>
+    </header>
+
+    <section id="video" class="fade-in">
+        <h2>Video De Invitación</h2>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/oxfoLXJgu60"
+                title="Video promocional del evento"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+    <div class="container">
+        <section id="info" class="event-info fade-in">
+            <h2>Invitación al evento</h2>
+            <p>Queridos hermanos y hermanas en Cristo,</p>
+            <p>Nos complace invitarles a un Retiro Espiritual que será una gran bendición para cada uno de nosotros.</p>
+            <p>Contaremos con la presencia del Pastor Ricardo Varón desde la ciudad de Chiclayo, quien nos guiará en momentos de reflexión y crecimiento espiritual.</p>
+            
+            <p><strong>Programa del Retiro:</strong></p>
+            <p>
+                • Dinámicas de grupo: Para fortalecer nuestros lazos y fomentar la unidad.<br>
+                • Alabanzas: Elevaremos nuestras voces en adoración, creando un ambiente de alabanza y gratitud.<br>
+                • La Palabra de Dios: Recibiremos enseñanzas inspiradoras que nos ayudarán a profundizar nuestra fe.<br>
+                • Oración y meditación: Momentos dedicados a la conexión personal con Dios.<br>
+                • Testimonios: Compartiremos experiencias que nos motivarán y alentará a vivir en la fe.<br>
+                • Actividades recreativas: Espacios para la diversión y la convivencia entre hermanos.
+            </p>
+            
+            <p>No te pierdas esta oportunidad de renovarte espiritualmente y fortalecer tu relación con Dios y con los demás.</p>
+            <p><strong>¡Te esperamos!</strong></p>
+            
+            <div class="event-details">
+                <div class="detail-card">
+                    <h3>Fecha y Hora</h3>
+                    <p>Sábado 23 de Noviembre del 2024</p>
+                    <p>De 8:00 am a 5:00 pm</p>
+                </div>
+                <div class="detail-card">
+                    <h3>Ubicación</h3>
+                    <p>CAMPESTRE EL CHACO</p>
+                    <p>Tomar la línea de combis a Llacanora: 32, 44 </p>
+                </div>
+                <div class="detail-card">
+                    <h3>Organiza:</h3>
+                    <p>Juventud de la sede Nacional de Cajamarca.</p>
+                </div>
+            </div>
+        </section>
+
+
+        <section id="galeria" class="fade-in">
+            <h2>Galería de Imágenes</h2>
+            <div class="image-slider">
+                <div class="slider-images">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/433482922_732278125682945_6123735392357182208_n.jpg?_nc_cat=104&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHpvafLPvcYbbpdXqY9uTfqkC6gDmh4ywGQLqAOaHjLASJhC5tFhjSAfbKFHS-CKe_phPR_l7fo_YvnQu2uoIxy&_nc_ohc=cJMkM-PqpUUQ7kNvgEXm8rg&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AdlN67vzmBsxbo0-mr_ZHQ2&oh=00_AYAXC7h2aRXLv23nLbpm66YZmTKoEmhSZBYpLRLozFfDlA&oe=673930A4" alt="Imagen del evento 1">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/464007513_867940408783382_6010177344396666024_n.jpg?_nc_cat=102&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEGoTzebXPZfcsQMGmFVtB-6FNURp1nGwjoU1RGnWcbCDPiqEbQxTYK74qU2Sn-mUgpla1Sen84fxGpyolf1yPb&_nc_ohc=V1ebGtgniSQQ7kNvgGHBlWz&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AwhOx_Q21G_w0bKbdR-8iSr&oh=00_AYCT_tAlvCJMnT1jIAo56vrcLB05trTAavnarTzNL1RTsA&oe=673931C5" alt="Imagen del evento 2">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/463840558_867940382116718_6035230521390234177_n.jpg?_nc_cat=100&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeFkjJ22efAx3fuuUm5dtRc7yK-zYAEglirIr7NgASCWKoL8y1JDbnbpiKxKIpUzooUpH-R8dNTrKYriyToYZBSn&_nc_ohc=cNVWC6_wft4Q7kNvgHnF5Cn&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=Afn02CWxDMPV7eJ0pjyFTDr&oh=00_AYA1iSAONRucP5RY4VZRQsGruuB3-WYJlRCMCjsRtDSJHA&oe=673959DF" alt="Imagen del evento 3">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/464223631_867940398783383_6193168547024629309_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeHl-nVS5f13Yc7v-sEyuRrLqkhB1AYB6maqSEHUBgHqZhUC5NBKZISRNHwc6eXiOlfBNHi_Y4B61BHy0rVsjIlH&_nc_ohc=_u-cblY40RUQ7kNvgEsrMVX&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AT7mpRSpHC0oLxVSnJhD85p&oh=00_AYDVYPhgHzf06S6ataqf2Wbp9p7ghnhnrhfL3L6Jw5Utlw&oe=67392D78" alt="Imagen del evento 4">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/464287546_867940412116715_4183408257534747623_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeF99t63kTr3kAPTe35cy83pNVI558emJ0A1Ujnnx6YnQDReB-VCiwg-dXOFe8jv02gPEYoRzMlvp9dfDJhihpvk&_nc_ohc=oiNgK6M4rJ8Q7kNvgEDgCHg&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AjXiBxsvGN6IGeuvelELihi&oh=00_AYCFiBbFvjs7urP7Hy0xLTXSam-M1VcE01YcKIZQmVy5Mw&oe=67392A1A" alt="Imagen del evento 5">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/432975559_732278235682934_3410274934590866257_n.jpg?_nc_cat=109&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeG2I3_4EDV8PzRZJrb6Yqi4Huf35G4yUYYe5_fkbjJRhgu0FuaGH67TvkXbxiz_tJjtPHtu6Ih7CNs-uwmG7vTh&_nc_ohc=SmW7MhZDlawQ7kNvgEEU_Ck&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=ARFJllrijNtBwa8Hu82-zRI&oh=00_AYCziLbNfzBBmcUNBiyiMe4I2mhPMcRw_lxKYUgSD_VwOw&oe=673956C6" alt="Imagen del evento 6">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/428599738_713435310900560_895964917173264498_n.jpg?_nc_cat=110&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeGDMTcGm1atWpA4zq7cztGkNPRuKx6rOBo09G4rHqs4GnnF6NCSJO5fiMwyZernW0mPOTkZ48o_DCFMR1o3cCyw&_nc_ohc=adccGjKTQkoQ7kNvgGCStho&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AgoWeoiSbJ4BAqKhwZMw7_S&oh=00_AYC2JLwyDB0yS5ctZKd4EVS5mLPiJvWt4TzhQWe1IiBufg&oe=67394810" alt="Imagen del evento 7">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/426457794_711490554428369_3512927409115577276_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=127cfc&_nc_eui2=AeEP-NO4ZhQq4lnj872vXnNaSSNPuLO67o1JI0-4s7rujWsTGo_oNRokvysyb63PqAzct3bALiOK6iom_gPAqkDt&_nc_ohc=mGIJIWVOFeYQ7kNvgF_vFC-&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=ABeJo2V4-yvDLx97EY1IN2r&oh=00_AYDIPBT-xvAA1QfiD17K4zRRx24XE80noc8vsqiI4SZTtg&oe=67394750" alt="Imagen del evento 8">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/380736060_630760232501402_7457021770623108483_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeENDvLriIqmdK5h644uTJPhI8-_xeZOGxojz7_F5k4bGuoYMT2WdKFrlczNxz6XZ_u49rhZbmpok9EH123uV2CP&_nc_ohc=zM_YS7F1ETAQ7kNvgF5laAN&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AtTo29dIpInA8m5IjE8Epip&oh=00_AYBsV0gHyCITxz1D7e5tkpLZeUFCnIEPlRC_2x1HXndWrg&oe=6739359D" alt="Imagen del evento 9">
+                    <img src="https://scontent.fcja1-1.fna.fbcdn.net/v/t39.30808-6/351781803_982949652863182_3437638069049733300_n.jpg?_nc_cat=103&ccb=1-7&_nc_sid=833d8c&_nc_eui2=AeHpPPLKJv6p6StfkVU0voGH2Lj4wo7jPc3YuPjCjuM9zdUPNf0PX481uDUCMDN36xKHesRzpmZboopREiyT0P0x&_nc_ohc=a_Awwl9inFoQ7kNvgGb745j&_nc_zt=23&_nc_ht=scontent.fcja1-1.fna&_nc_gid=AZRLojLH2FdTwWovEqLKU9j&oh=00_AYDeIAOtjYn8DzYKhU3lVeTItxmNqvzPWIeoCO559NCl_w&oe=673956A5" alt="Imagen del enevnto 10">
+                    <!-- Añade más imágenes aquí hasta llegar a 15 -->
+                </div>
+                <button class="slider-button prev" aria-label="Imagen anterior">&lt;</button>
+                <button class="slider-button next" aria-label="Imagen siguiente">&gt;</button>
+            </div>
+        </section>
+
+        <section id="ubicacion" class="fade-in">
+            <h2>Ubicación del Evento</h2>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m17!1m12!1m3!1d975.8374183901855!2d-78.42933892089843!3d-7.194029499999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m2!1m1!2zN8KwMTEnMzcuMSJTIDc4wrAyNSc0My4wIlc!5e0!3m2!1ses!2spe!4v1699040000000!5m2!1ses!2spe"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade"
+                    title="Ubicación del evento en Google Maps">
+                </iframe>
+            </div>
+        </section>
+
+        <!-- New Form Section -->
+        <section id="formulario" class="form-container fade-in">
+            <h2>Formulario de Inscripción</h2>
+            <form id="registrationForm">
+                <div class="form-group">
+                    <label for="fullName">Nombre y Apellidos:</label>
+                    <input type="text" id="fullName" name="fullName" required>
+                </div>
+                <div class="form-group">
+                    <label for="age">Edad:</label>
+                    <input type="number" id="age" name="age" required>
+                </div>
+                <div class="form-group">
+                    <label for="religion">Religión a la que actualmente pertenece:</label>
+                    <select id="religion" name="religion" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Evangelico">Evangélico</option>
+                        <option value="Catolico">Católico</option>
+                        <option value="Libre pensador">Libre pensador</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="attending">¿Está congregando a una iglesia actualmente?</label>
+                    <select id="attending" name="attending" required>
+                        <option value="">Seleccione una opción</option>
+                        <option value="Si">Sí</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="form-group" id="churchNameGroup" style="display: none;">
+                    <label for="churchName">Escriba el nombre de la iglesia:</label>
+                    <input type="text" id="churchName" name="churchName">
+                </div>
+                <button type="submit" class="submit-button">Enviar</button>
+            </form>
+        </section>
+    </div>
+
+    <a href="https://wa.me/51976225731?text=Hola,%20me%20gustaría%20recibir%20más%20información%20sobre%20el%20evento" 
+       class="whatsapp-button" 
+       target="_blank"
+       rel="noopener noreferrer">
+        <svg class="whatsapp-icon" viewBox="0 0 24 24">
+            <path d="M12 0a12 12 0 1 0 12 12A12.014 12.014 0 0 0 12 0zm5.709 17.392l-1.041 1.041a2.724 2.724 0 0 1-3.322.482c-1.777-.777-3.837-2.283-5.545-3.991s-3.214-3.768-3.991-5.545a2.724 2.724 0 0 1 .482-3.322l1.041-1.041a1.304 1.304 0 0 1 1.85 0l2.083 2.083a1.304 1.304 0 0 1 0 1.85l-1.041 1.041a.652.652 0 0 0 0 .924c.777 1.777 2.283 3.837 3.991 5.545s3.768 3.214 5.545 3.991a.652.652 0 0 0 .924 0l1.041-1.041a1.304 1.304 0 0 1 1.85 0l2.083 2.083a1.304 1.304 0 0 1 0 1.85z"/>
+        </svg>
+        RECIBIR MÁS INFO
+    </a>
+
+    <script>
+        const countdownDate = new Date("Nov 23, 2024 08:00:00").getTime();
+        const countdownFunction = setInterval(function() {
+            const now = new Date().getTime();
+            const distance = countdownDate - now;
+            
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            
+            document.getElementById("days").innerHTML = days.toString().padStart(2, '0');
+            document.getElementById("hours").innerHTML = hours.toString().padStart(2, '0');
+            document.getElementById("minutes").innerHTML = minutes.toString().padStart(2, '0');
+            document.getElementById("seconds").innerHTML = seconds.toString().padStart(2, '0');
+            
+            if (distance < 0) {
+                clearInterval(countdownFunction);
+                document.querySelector(".countdown").innerHTML = "¡El evento ha comenzado!";
+            }
+        }, 1000);
+
+        const sliderImages = document.querySelector('.slider-images');
+        const prevButton = document.querySelector('.slider-button.prev');
+        const nextButton = document.querySelector('.slider-button.next');
+        let currentIndex = 0;
+        const totalImages = document.querySelectorAll('.slider-images img').length;
+
+        prevButton.addEventListener('click', () => {
+            currentIndex = (currentIndex - 1 + totalImages) % totalImages;
+            updateSlider();
+        });
+
+        nextButton.addEventListener('click', () => {
+            currentIndex = (currentIndex + 1) % totalImages;
+            updateSlider();
+        });
+
+        function updateSlider() {
+            sliderImages.style.transform = `translateX(-${currentIndex * 100}%)`;
+        }
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        const fadeElements = document.querySelectorAll('.fade-in');
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = 1;
+                }
+            });
+        }, { threshold: 0.1 });
+
+        fadeElements.forEach(element => {
+            element.style.opacity = 0;
+            element.style.transition = 'opacity 0.5s ease-in';
+            observer.observe(element);
+        });
+
+        // New script for form handling
+        document.getElementById('attending').addEventListener('change', function() {
+            const churchNameGroup = document.getElementById('churchNameGroup');
+            if (this.value === 'Si') {
+                churchNameGroup.style.display = 'block';
+            } else {
+                churchNameGroup.style.display = 'none';
+            }
+        });
+
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const formData = new FormData(this);
+            let message = 'Paz del Señor, estos son mis datos para el registro del evento.\n\n';
+            const fieldNames = {
+                fullName: 'Nombre y Apellidos',
+                age: 'Edad',
+                religion: 'Religión',
+                attending: 'Congrega actualmente',
+                churchName: 'Nombre de la iglesia a la que congrega'
+            };
+            for (let [key, value] of formData.entries()) {
+                if (key === 'attending') {
+                    value = value === 'Si' ? 'Sí' : 'No';
+                }
+                if (key !== 'churchName' || (key === 'churchName' && formData.get('attending') === 'Si')) {
+                    message += `${fieldNames[key]}: ${value}\n`;
+                }
+            }
+            const whatsappUrl = `https://wa.me/976225731?text=${encodeURIComponent(message)}`;
+            window.open(whatsappUrl, '_blank');
+        });
+    </script>
+</body>
+</html>
